@@ -4,7 +4,6 @@ export const StatisticsList = styled.ul`
   list-style: none;
   padding: 0;
   margin: 25px auto 0 auto;
-
   width: 200px;
 `;
 
