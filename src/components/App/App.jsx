@@ -7,31 +7,14 @@ import { Statistics } from '../Statistics/Statistics';
 import { Notification } from '../Notification/Notification';
 
 export const App = () => {
-  const [good, setGood] = useState(0);
-  const [neutral, setNeutral] = useState(0);
-  const [bad, setBad] = useState(0);
+  const [good] = useState(0);
+  const [neutral] = useState(0);
+  const [bad] = useState(0);
+  const [state, setState] = useState({ good: 0, bad: 0, neutral: 0 });
 
   const onLeaveFeedback = option => {
-    switch (option) {
-      case 'good':
-        setGood(state => state + 1);
-        break;
-
-      case 'neutral':
-        setNeutral(state => state + 1);
-        break;
-
-      case 'bad':
-        setBad(state => state + 1);
-        break;
-
-      default:
-        alert('something went wrong');
-        break;
-    }
+    setState(prevState => ({ ...prevState, [option]: prevState[option] + 1 }));
   };
-
-  const options = ['good', 'bad', 'neutral'];
 
   const totalFeedback = good + bad + neutral;
 
@@ -43,9 +26,7 @@ export const App = () => {
     <div>
       <Section title={'Please leave your feedback'}>
         <FeedbackOptions
-          options={options.map(option => {
-            return option;
-          })}
+          options={Object.keys(state)}
           onLeaveFeedback={onLeaveFeedback}
         />
       </Section>
